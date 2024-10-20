@@ -1,11 +1,6 @@
 //tools
 use iced::widget::{button,text,column};
 
-let increment = button("+").on_press(Message::Increment);
-let decrement = button("-").on_press(Message::Decrement); // APP --> Use case of msg enum..
-let counter = text(15);
-
-
 struct Counter {
     value: i64,
 }
@@ -32,6 +27,9 @@ impl Counter {
 
 
 fn main() {
+    let increment = button("+").on_press(Message::Increment);
+    let decrement = button("-").on_press(Message::Decrement); // APP --> Use case of msg enum..
+    let counter = text(15);
 
     let interface = column![increment, counter, decrement];
 
