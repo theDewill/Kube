@@ -11,6 +11,13 @@ use sha2::{Sha256, Digest};
 
 const CHUNK_SIZE: usize = 1024 * 1024; // 1 MB chunks
 
+
+//Util Class-->
+struct FileParser {
+    current_node : Vec<u8>,
+
+}
+
 #[derive(Serialize, Deserialize)]
 struct ChunkInfo {
     index: usize,
@@ -34,12 +41,13 @@ enum FileType {
     Audio,
 }
 
-fn file_distrib(file_path: &str, log_path: &str) -> Result<(), Box<dyn std::error::Error>> {
+pub fn file_distrib(file_path: &str, log_path: &str) -> Result<(), Box<dyn std::error::Error>> {
     let file_type = identify_file_type(file_path)?;
     let mut file_contents = read_file(file_path)?;
 
     // Step 1: Compress the file
     file_contents = compress_file(&file_contents, &file_type)?;
+    println!("Compression Done..")
 
     // Step 2: Encrypt the file
     let (encrypted_contents, key, nonce) = encrypt_file(&file_contents)?;

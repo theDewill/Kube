@@ -5,3 +5,5 @@ edition = "2021"
 
 [dependencies]
 iced = "0.13.1"
+serde = "1.0.214"
+tokio = "1.41.1"
