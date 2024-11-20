@@ -1,11 +1,8 @@
 //mod sector
 //mod chunker;
-use tokio::{t}
 mod net;
+use net::net_utility;
 
-async fn tokio_test() -> i32 {}
-
-#[tokio::main]
 fn main() {
     println!("works");
 }

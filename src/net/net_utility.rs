@@ -1,5 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
+use std::io::Result;
 use std::net::{IpAddr, SocketAddr, UdpSocket};
 use std::sync::{Arc, Mutex};
 use std::time::{Duration, Instant};
@@ -31,7 +32,7 @@ pub struct NetworkDiscovery {
 }
 
 impl NetworkDiscovery {
-    pub fn new(node_id: String, service_port: u16) -> std::io::Result<Self> {
+    pub fn new(node_id: String, service_port: u16) -> Result<Self> {
         let socket = UdpSocket::bind(("0.0.0.0", DISCOVERY_PORT))?;
         socket.set_broadcast(true)?;
 
@@ -43,7 +44,7 @@ impl NetworkDiscovery {
         })
     }
 
-    pub async fn start(&self) -> std::io::Result<()> {
+    pub async fn start(&self) -> Result<()> {
         let socket_clone = self.socket.try_clone()?;
         let nodes_clone = Arc::clone(&self.nodes);
         let node_id_clone = self.node_id.clone();
@@ -119,7 +120,7 @@ impl NetworkDiscovery {
     }
 }
 
-// Helper function to get local IP addresses
+// gathering -  local IP addresses
 pub fn get_local_ips() -> Vec<IpAddr> {
     let mut ips = Vec::new();
     if let Ok(interfaces) = if_addrs::get_if_addrs() {
