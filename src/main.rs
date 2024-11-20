@@ -2,7 +2,9 @@
 //mod chunker;
 mod net;
 
+async fn tokio_test() -> i32 {}
+
 #[tokio::main]
-async fn main() {
+fn main() {
     println!("works");
 }
